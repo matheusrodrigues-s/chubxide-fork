@@ -583,6 +583,7 @@ if game.PlaceId == 3541987450 or game.PlaceId == 5208655184 or game.PlaceId == 1
             inventory_search = false,
             unhide_players = true,
             gate_anti_backfire = false,
+            snarv_anti_backfire = false,
             streamer_mode = false,
 
             friendly_keybind = "None",
@@ -9948,6 +9949,14 @@ if game.PlaceId == 3541987450 or game.PlaceId == 5208655184 or game.PlaceId == 1
                 Default = cheat_client.config.gate_anti_backfire,
                 Callback = function(value)
                     cheat_client.config.gate_anti_backfire = value
+                end
+            })
+            
+            group_misc:AddToggle("snarv_anti_backfire", {
+                Text = "Snarv Anti Backfire",
+                Default = cheat_client.config.snarv_anti_backfire,
+                Callback = function(value)
+                    cheat_client.config.snarv_anti_backfire = value
                 end
             })
         end
@@ -21557,6 +21566,28 @@ if game.PlaceId == 3541987450 or game.PlaceId == 5208655184 or game.PlaceId == 1
                                     local mana_value = mana_instance.Value;
 
                                     if (mana_value > 75 and mana_value < 80) or not cs:HasTag(plr.Character,'Danger') and FindFirstChild(plr.Character, "AzaelHorn") then
+                                        return old_remote(Event, ...)
+                                    end
+                                    
+                                    return
+                                end
+                            end
+                        end
+                    end
+                    
+                	if shared and Toggles and Toggles.snarv_anti_backfire and Toggles.snarv_anti_backfire.Value and tostring(Event):match("RightClick") then
+                        if plr.Character then
+                            if FindFirstChild(plr.Character, 'Snarvindur') then
+                                local artifacts_folder = FindFirstChild(plr.Character, "Artifacts")
+                                if artifacts_folder and FindFirstChild(artifacts_folder, "PhilosophersStone") then
+                                    return old_remote(Event, ...)
+                                end
+
+                                local mana_instance = FindFirstChild(plr.Character, 'Mana')
+                                if mana_instance then
+                                    local mana_value = mana_instance.Value;
+
+                                    if (mana_value > 15 and mana_value < 30) then
                                         return old_remote(Event, ...)
                                     end
                                     
